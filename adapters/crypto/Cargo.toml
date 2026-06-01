@@ -1,0 +1,18 @@
+[package]
+name = "lms_crypto"
+version = "0.1.0"
+edition = "2021"
+description = "Local cryptography provider for the Moribund LMS Vault."
+
+[dependencies]
+# Point to our pure core engine
+lms_core = { path = "../../core" }
+
+# Data handling
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Military-grade encryption & hashing
+chacha20poly1305 = "0.10" 
+argon2 = "0.5"            
+rand = "0.8"

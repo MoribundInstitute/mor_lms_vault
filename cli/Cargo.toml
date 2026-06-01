@@ -1,0 +1,14 @@
+[package]
+name = "cli"
+version = "0.1.0"
+edition = "2021"
+description = "Terminal interface for the Moribund LMS Vault."
+
+[dependencies]
+# Connect to our local ecosystem
+lms_core = { path = "../core" }
+lms_crypto = { path = "../adapters/crypto" }
+
+# Terminal UI tools
+clap = { version = "4.4", features = ["derive"] }
+rpassword = "7.2"
