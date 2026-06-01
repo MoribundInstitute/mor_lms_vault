@@ -4,5 +4,7 @@ members = [
     "core",
     "adapters/crypto",
     "adapters/auth",
-    "cli"
+    "cli",
+    "mor_sensor_ext",
+    "mor_native_bridge"
 ]

@@ -17,6 +17,8 @@ pub enum NodeType {
     Lexicon,
     /// A course module (Requires completion, optional SRS)
     Lesson,
+    /// Time-based media (video, podcast, audiobook) — tracks watch/listen progress
+    Media,
 }
 
 /// The Spaced Repetition (SM-2) engine data.
@@ -65,6 +67,53 @@ impl Default for SrsData {
     }
 }
 
+/// Progress tracking for time-based media (video, podcast, audiobook).
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MediaData {
+    /// Total length in seconds. 0 if unknown.
+    pub duration_seconds: u32,
+    /// Current playback position in seconds.
+    pub progress_seconds: u32,
+    /// Unix timestamp of the most recent progress update.
+    pub last_viewed_ts: i64,
+}
+
+impl MediaData {
+    pub fn new(duration_seconds: u32) -> Self {
+        Self {
+            duration_seconds,
+            progress_seconds: 0,
+            last_viewed_ts: 0,
+        }
+    }
+
+    /// Record a new playback position.
+    pub fn update_progress(&mut self, position_seconds: u32, current_time_ts: i64) {
+        self.progress_seconds = position_seconds;
+        self.last_viewed_ts = current_time_ts;
+    }
+
+    /// Fraction of the media consumed, 0.0–1.0. Returns 0.0 when duration is unknown.
+    pub fn completion_ratio(&self) -> f32 {
+        if self.duration_seconds == 0 {
+            0.0
+        } else {
+            (self.progress_seconds as f32 / self.duration_seconds as f32).min(1.0)
+        }
+    }
+
+    /// Conventional "finished" threshold: 95% consumed.
+    pub fn is_finished(&self) -> bool {
+        self.completion_ratio() >= 0.95
+    }
+}
+
+impl Default for MediaData {
+    fn default() -> Self {
+        Self::new(0)
+    }
+}
+
 /// The universal tracking object saved in the JSON database.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TrackedNode {
@@ -72,7 +121,10 @@ pub struct TrackedNode {
     pub parent_id: Option<String>,  
     pub node_type: NodeType,
     pub is_completed: bool,
+    #[serde(default)]
     pub srs: Option<SrsData>,       
+    #[serde(default)]
+    pub media: Option<MediaData>,
 }
 
 impl TrackedNode {

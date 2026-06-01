@@ -1,0 +1,30 @@
+[package]
+name = "sensor_ext"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+lms_core = { path = "../core" }
+lms_crypto = { path = "../adapters/crypto" }
+wasm-bindgen = "0.2.87"
+base64 = "0.21"
+getrandom = { version = "0.2", features = ["js"] }
+js-sys = "0.3.64"
+
+[dependencies.web-sys]
+version = "0.3.64"
+features = [
+  "Document",
+  "Element",
+  "HtmlElement",
+  "Window",
+  "Node",
+  "NodeList",
+  "Event",
+  "console",
+  "CssStyleDeclaration",
+  "Storage"  
+]

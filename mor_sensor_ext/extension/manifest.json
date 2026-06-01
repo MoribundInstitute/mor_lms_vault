@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Moribund Sensor",
+  "version": "1.0",
+  "description": "Offline-first tracker bridge for Moribund LMS",
+"permissions": ["storage", "nativeMessaging"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.blogspot.com/*", "*://localhost/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["pkg/*"],
+      "matches": ["*://*.blogspot.com/*", "*://localhost/*"]
+    }
+  ]
+}

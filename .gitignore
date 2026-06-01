@@ -1,1 +1,8 @@
 /target
+
+# wasm-pack generated output
+mor_sensor_ext/extension/pkg/
+
+# Personal data — never commit
+*.enc
+library.json
