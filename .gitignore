@@ -1,8 +1,16 @@
-/target
+# Rust Build Artifacts
+/target/
+Cargo.lock
 
-# wasm-pack generated output
-mor_sensor_ext/extension/pkg/
-
-# Personal data — never commit
+# Moribund Vault Personal Data (CRITICAL)
 *.enc
-library.json
+*.keys.devices
+state.json
+my_brain.*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Ensure the plan is tracked
+!MOR_PLAN.md

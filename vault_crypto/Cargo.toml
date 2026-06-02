@@ -1,0 +1,32 @@
+[package]
+name = "vault_crypto"
+version = "0.1.0"
+edition = "2021"
+description = "Local cryptography provider for the Moribund LMS Vault."
+
+[dependencies]
+# ── Internal workspace dependencies ─────────────────────────────────────────
+lms_core = { package = "vault_core", path = "../vault_core" }
+
+# ── Serialization ──────────────────────────────────────────────────────────
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# ── Multi-device Envelope Encryption & OS Keyring ──────────────────────────
+# NOTE: Pinned to keyring 3.x because 4.x split backends into separate crates
+# (apple-native-keyring-store, dbus-secret-service-keyring-store, etc.).
+# Your code uses the 3.x API (keyring::Entry, set_password, etc.), so this
+# avoids a non-trivial refactor. Migration to keyring-core can be done later.
+age = "0.11.3"
+keyring = { version = "3", features = [
+    "apple-native",
+    "windows-native",
+    "sync-secret-service",
+    "linux-native",
+] }
+
+# ── Streaming AEAD & Utilities ─────────────────────────────────────────────
+chacha20poly1305 = { version = "0.10", features = ["stream"] }
+rand = "0.8"
+zeroize = { version = "1", features = ["derive"] }
+anyhow = "1"

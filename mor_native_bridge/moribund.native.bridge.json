@@ -1,9 +1,0 @@
-{
-  "name": "moribund.native.bridge",
-  "description": "Moribund Offline Tracker Bridge",
-  "path": "/home/deo-user/mor_lms_vault/target/release/mor_native_bridge",
-  "type": "stdio",
-  "allowed_origins": [
-    "chrome-extension://ffdnoolignchomllpiibkiiommkaokgd" 
-  ]
-}

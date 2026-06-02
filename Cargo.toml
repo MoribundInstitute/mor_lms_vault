@@ -1,10 +1,9 @@
 [workspace]
 resolver = "2"
 members = [
-    "core",
-    "adapters/crypto",
-    "adapters/auth",
-    "cli",
-    "mor_sensor_ext",
-    "mor_native_bridge"
+    "vault_core",
+    "bridge_linux_fs",
+    "bridge_wasm_idb",
+    "ext_chrome_sensor",
+    "vault_cli"
 ]

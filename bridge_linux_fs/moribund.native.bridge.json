@@ -1,0 +1,9 @@
+{
+  "name": "moribund.native.bridge",
+  "description": "Moribund LMS vault native messaging bridge",
+  "path": "/home/deo-user/mor_lms_vault/mor_native_bridge/run_bridge.sh",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://ffdnoolignchomllpiibkiiommkaokgd/"
+  ]
+}

@@ -1,9 +1,0 @@
-[package]
-name = "lms_core"
-version = "0.1.0"
-edition = "2021"
-description = "The pure spaced-repetition and tracking engine for the Moribund LMS ecosystem."
-
-[dependencies]
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
